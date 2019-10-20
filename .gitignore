@@ -1,3 +1,7 @@
 !*.min.js
 !*.min.css
 !*.map
+
+## Added by Sean
+
+.vs
