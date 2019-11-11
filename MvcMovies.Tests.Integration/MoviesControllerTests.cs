@@ -19,6 +19,8 @@ namespace MvcMove.Tests.Integration
             _dbContext = new MovieDBContext();
             _transaction = _dbContext.Database.BeginTransaction();
 
+            _dbContext.Movies.RemoveRange(_dbContext.Movies.ToList());
+
             var aRomanceMovie = new Movie { ID = 1, Genre = "Romance", Price = 1.00m, Rating = "A+", ReleaseDate = DateTime.Now, Title = "A Romance Movie" };
             var romeoAndJuliet = new Movie { ID = 2, Genre = "Romance", Price = 1.00m, Rating = "A+", ReleaseDate = DateTime.Now, Title = "Romeo and Juliet" };
             var zoolander = new Movie { ID = 3, Genre = "Comedy", Price = 1.00m, Rating = "A+", ReleaseDate = DateTime.Now, Title = "Romeo and Juliet" };
@@ -41,6 +43,25 @@ namespace MvcMove.Tests.Integration
         public void DBStartsWithThreeMovies()
         {
             _dbContext.Movies.ToList().Count.Should().Be(4);
+        }
+
+        [Fact]
+        public void AddingMovieMakes5Movies()
+        {
+            var newMov = new Movie
+            {
+                Price = 9.99m,
+                Genre = "SciFi",
+                Title = "Hello World",
+                Rating = "PG",
+                ReleaseDate = DateTime.Now
+            };
+
+            _dbContext.Movies.Add(newMov);
+
+            _dbContext.SaveChanges();
+
+            _dbContext.Movies.ToList().Count.Should().Be(5);
         }
     }
 }
