@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using FluentAssertions;
+using Microsoft.AspNetCore.Mvc;
 using MvcMovie.Controllers;
 using MvcMovie.Models;
 using Xunit;
