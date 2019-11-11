@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using FluentAssertions;
 using MvcMovie.Controllers;
 using MvcMovie.Models;
@@ -43,7 +40,7 @@ namespace MvcMove.Tests.Integration
         [Fact]
         public void DBStartsWithThreeMovies()
         {
-            _dbContext.Movies.ToList().Count.Should().Be(2);
+            _dbContext.Movies.ToList().Count.Should().Be(4);
         }
     }
 }
