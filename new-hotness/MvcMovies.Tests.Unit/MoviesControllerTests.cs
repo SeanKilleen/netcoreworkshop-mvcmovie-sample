@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using FluentAssertions;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Moq;
 using MvcMovie.Models;
 using Xunit;
@@ -80,7 +83,7 @@ namespace MvcMovie.Tests.Unit
             public void SetsViewBagMovieGenreToDistinctListOfGenres()
             {
                 var result = _sut.Index("", "") as ViewResult;
-                var x = result.ViewBag.MovieGenre as SelectList;
+                var x = result.ViewData["MovieGenre"] as SelectList;
 
                 x.Count().Should().Be(3);
                 x.Should().Contain(thing => thing.Text == "Romance");
