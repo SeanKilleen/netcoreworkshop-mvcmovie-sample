@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Web.Mvc;
 using FluentAssertions;
 using MvcMovie.Controllers;
 using MvcMovie.Models;
@@ -46,7 +48,7 @@ namespace MvcMove.Tests.Integration
         }
 
         [Fact]
-        public void AddingMovieMakes5Movies()
+        public void ContextTest_AddingMovieMakes5Movies()
         {
             var newMov = new Movie
             {
@@ -62,6 +64,33 @@ namespace MvcMove.Tests.Integration
             _dbContext.SaveChanges();
 
             _dbContext.Movies.ToList().Count.Should().Be(5);
+        }
+
+        [Theory]
+        [InlineData("When Harry Met Sally")]
+        [InlineData("Ghostbusters 2")]
+        [InlineData("Rio Bravo")]
+        public void ExactTitleSearch_YieldsResult(string titleName)
+        {
+            var result = _sut.Index(movieGenre:null, titleName) as ViewResult;
+
+            var model = result.Model as IEnumerable<Movie>;
+
+            model.Count().Should().Be(1);
+            model.First().Title.Should().Be(titleName);
+        }
+
+        [Fact]
+        public void TitleSearch_DoesContains()
+        {
+            var searchString = "Ghostbusters";
+            var result = _sut.Index(movieGenre: null, searchString) as ViewResult;
+
+            var model = result.Model as IEnumerable<Movie>;
+
+            model.Count().Should().Be(2);
+            model.Should().Contain(x=>x.Title == "Ghostbusters");
+            model.Should().Contain(x => x.Title == "Ghostbusters 2");
         }
     }
 }
