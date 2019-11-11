@@ -7,6 +7,7 @@ using FluentAssertions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.Extensions.Primitives;
 using Moq;
 using MvcMovie.Models;
 using Xunit;
@@ -208,7 +209,7 @@ namespace MvcMovie.Tests.Unit
             {
                 var searchString = "blahblah";
 
-                var result = _sut.Index(new FormCollection(), searchString);
+                var result = _sut.Index(new FormCollection(new Dictionary<string, StringValues>()), searchString);
 
                 result.Should().Be($"<h3> From [HttpPost]Index: {searchString}</h3>");
             }
