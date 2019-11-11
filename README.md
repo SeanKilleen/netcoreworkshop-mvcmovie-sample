@@ -15,6 +15,7 @@ Although we'll be moving away from these needs, in order to get started with thi
 * A Windows machine or VM
 * Visual Studio
 * SQL Server (at least SQL Express with LocalDb). The connection string is configrued for SqlExpress LocalDb but we should be able to modify it pretty quickly if need be.
+* The [.NET Portability Analyzer](https://marketplace.visualstudio.com/items?itemName=ConnieYau.NETPortabilityAnalyzer)
 * .NET Framework 4.6.1 or later (the sample app begins at v4.6.1)
 * .NET Core v3.x
 * An internet connection
