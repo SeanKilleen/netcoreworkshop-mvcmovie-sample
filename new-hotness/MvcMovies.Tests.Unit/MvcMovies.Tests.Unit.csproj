@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="fluentassertions" Version="5.9.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
     <PackageReference Include="moq" Version="4.13.1" />
     <PackageReference Include="xunit" Version="2.4.1" />
   </ItemGroup>
