@@ -12,7 +12,12 @@ namespace MvcMovie.Controllers
 {
     public class MoviesController : Controller
     {
-        private MovieDBContext db = new MovieDBContext();
+        private IMovieDbContext db;
+
+        public MoviesController(IMovieDbContext dbContext)
+        {
+            this.db = dbContext ?? throw new ArgumentNullException(nameof(dbContext));
+        }
 
         // GET: Movies
         public ActionResult Index(string movieGenre, string searchString)

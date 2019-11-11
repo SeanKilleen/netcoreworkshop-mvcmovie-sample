@@ -2,6 +2,7 @@
 using System.Collections;
 using System.ComponentModel.DataAnnotations;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace MvcMovie.Models
 {
@@ -46,8 +47,25 @@ namespace MvcMovie.Models
         public string Rating { get; set; }
     }
 
-    public class MovieDBContext : DbContext
+    public interface IMovieDbContext : IDisposable
+    {
+        DbSet<Movie> Movies { get; set; }
+        void SaveChanges();
+        DbEntityEntry<Movie> Entry(Movie movie);
+    }
+
+    public class MovieDBContext : DbContext, IMovieDbContext
     {
         public DbSet<Movie> Movies { get; set; }
+
+        void IMovieDbContext.SaveChanges()
+        {
+            this.SaveChanges();
+        }
+
+        DbEntityEntry<Movie> IMovieDbContext.Entry(Movie movie)
+        {
+            return this.Entry(movie);
+        }
     }
 }
