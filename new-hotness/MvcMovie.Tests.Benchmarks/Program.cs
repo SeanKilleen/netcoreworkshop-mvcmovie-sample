@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
+using Microsoft.AspNetCore.Mvc;
 using MvcMovie.Controllers;
 using MvcMovie.Models;
 
