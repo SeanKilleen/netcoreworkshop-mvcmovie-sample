@@ -256,9 +256,9 @@ namespace MvcMovie.Tests.Unit
             [Fact]
             public void WhenMovieNotFound_ReturnNotFoundResult()
             {
-                var result = _sut.Details(3);
+                var result = _sut.Details(3) as StatusCodeResult;
 
-                result.GetType().Name.Should().Be("HttpNotFoundResult");
+                result.StatusCode.Should().Be(404);
             }
 
             [Fact]
