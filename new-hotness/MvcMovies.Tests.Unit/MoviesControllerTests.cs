@@ -248,7 +248,7 @@ namespace MvcMovie.Tests.Unit
             [Fact]
             public void NoID_ReturnsBadRequest()
             {
-                var result = _sut.Details(null) as HttpStatusCodeResult;
+                var result = _sut.Details(null) as StatusCodeResult;
 
                 result.StatusCode.Should().Be(400);
             }
