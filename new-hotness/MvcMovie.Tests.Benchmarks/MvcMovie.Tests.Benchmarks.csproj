@@ -9,4 +9,8 @@
     <ProjectReference Include="..\MvcMovie\MvcMovie.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="benchmarkdotnet" Version="0.12.0" />
+  </ItemGroup>
+
 </Project>
