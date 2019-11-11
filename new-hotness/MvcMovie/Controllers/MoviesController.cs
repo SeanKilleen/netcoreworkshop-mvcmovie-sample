@@ -22,7 +22,7 @@ namespace MvcMovie.Controllers
         }
 
         // GET: Movies
-        public ActionResult Index(string movieGenre, string searchString)
+        public IActionResult Index(string movieGenre, string searchString)
         {
             var genreLst = new List<string>();
 
@@ -56,7 +56,7 @@ namespace MvcMovie.Controllers
         }
 
         // GET: Movies/Details/5
-        public ActionResult Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
@@ -71,7 +71,7 @@ namespace MvcMovie.Controllers
         }
 
         // GET: Movies/Create
-        public ActionResult Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -81,7 +81,7 @@ namespace MvcMovie.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public IActionResult Create([Bind(Include = "ID,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -94,7 +94,7 @@ namespace MvcMovie.Controllers
         }
 
         // GET: Movies/Edit/5
-        public ActionResult Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
@@ -113,7 +113,7 @@ namespace MvcMovie.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
+        public IActionResult Edit([Bind(Include = "ID,Title,ReleaseDate,Genre,Price,Rating")] Movie movie)
         {
             if (ModelState.IsValid)
             {
@@ -125,7 +125,7 @@ namespace MvcMovie.Controllers
         }
 
         // GET: Movies/Delete/5
-        public ActionResult Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
@@ -142,7 +142,7 @@ namespace MvcMovie.Controllers
         // POST: Movies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
             Movie movie = db.Movies.Find(id);
             db.Movies.Remove(movie);
