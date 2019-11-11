@@ -70,7 +70,7 @@ namespace MvcMove.Tests.Integration
         [InlineData("When Harry Met Sally")]
         [InlineData("Ghostbusters 2")]
         [InlineData("Rio Bravo")]
-        public void ExactTitleSearch_YieldsResult(string titleName)
+        public void Index_ExactTitleSearch_YieldsResult(string titleName)
         {
             var result = _sut.Index(movieGenre:null, titleName) as ViewResult;
 
@@ -81,7 +81,7 @@ namespace MvcMove.Tests.Integration
         }
 
         [Fact]
-        public void TitleSearch_DoesContains()
+        public void Index_TitleSearch_DoesContains()
         {
             var searchString = "Ghostbusters";
             var result = _sut.Index(movieGenre: null, searchString) as ViewResult;
@@ -91,6 +91,56 @@ namespace MvcMove.Tests.Integration
             model.Count().Should().Be(2);
             model.Should().Contain(x=>x.Title == "Ghostbusters");
             model.Should().Contain(x => x.Title == "Ghostbusters 2");
+        }
+
+        [Fact]
+        public void Index_TitleSearchIsNotCaseSensitive()
+        {
+            var searchString = "ghostbusters";
+            var result = _sut.Index(movieGenre: null, searchString) as ViewResult;
+
+            var model = result.Model as IEnumerable<Movie>;
+
+            model.Count().Should().Be(2);
+            model.Should().Contain(x => x.Title == "Ghostbusters");
+            model.Should().Contain(x => x.Title == "Ghostbusters 2");
+        }
+
+        [Fact]
+        public void Index_GenreIsExactMatchInsteadOfContains()
+        {
+            var result = _sut.Index(movieGenre: "Comedy", searchString:null) as ViewResult;
+
+            var model = result.Model as IEnumerable<Movie>;
+
+            model.Count().Should().Be(2);
+            model.Should().Contain(x => x.Title == "Ghostbusters");
+            model.Should().Contain(x => x.Title == "Ghostbusters 2");
+        }
+
+        [Theory]
+        [InlineData("rom")]
+        [InlineData("romantic")]
+        [InlineData("romanic com")]
+        public void Index_GenreIsFullMatchOnly(string partialGenre)
+        {
+            var result = _sut.Index(movieGenre: partialGenre, searchString: null) as ViewResult;
+
+            var model = result.Model as IEnumerable<Movie>;
+
+            model.Count().Should().Be(0);
+        }
+        [Fact]
+        public void Index_GenreIsNotCaseSensitive()
+        {
+            var lowerCaseGenre = "romantic comedy";
+
+            var result = _sut.Index(movieGenre: lowerCaseGenre, searchString: null) as ViewResult;
+
+            var model = result.Model as IEnumerable<Movie>;
+
+            model.Count().Should().Be(1);
+            model.First().Title.Should().Be("When Harry Met Sally");
         }
     }
 }
