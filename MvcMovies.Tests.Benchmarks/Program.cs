@@ -18,9 +18,10 @@ namespace MvcMovies.Tests.Benchmarks
     }
 
     [HtmlExporter]
+    [MemoryDiagnoser]
     public class SearchTests
     {
-        private readonly int NumberOfSearches = 100;
+        private readonly int NumberOfSearches = 25;
 
         [Benchmark]
         public void WriteAllMovies()
