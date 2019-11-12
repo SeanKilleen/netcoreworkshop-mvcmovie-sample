@@ -26,6 +26,12 @@ namespace MvcMovie
         {
             services.AddTransient<IMovieDbContext, MovieDBContext>();
             services.AddControllersWithViews();
+            
+            services.AddHealthChecks()
+                    .AddCheck<DbHealthCheck>(
+                                             "example_health_check",
+                                             failureStatus: HealthStatus.Degraded,
+                                             tags: new[] { "db" });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -45,6 +51,11 @@ namespace MvcMovie
             app.UseStaticFiles();
 
             app.UseRouting();
+            
+            app.UseEndpoints(endpoints =>
+                             {
+                                 endpoints.MapHealthChecks("/health");
+                             });
 
             app.UseAuthorization();
 
