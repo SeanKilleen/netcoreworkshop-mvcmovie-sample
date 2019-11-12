@@ -24,4 +24,19 @@ You also may wish to install:
 
 * Docker for Windows (in case we want to explore containerization)
 
-After we get past the initial conversion phase, things will get much more flexible.
+After we get past the initial conversion phase, things will get much more flexible.'
+
+## Helpful Links / References
+
+* [MS Guidance on Migrating from ASP.NET to .NET Core 3.0](https://docs.microsoft.com/en-us/aspnet/core/migration/proper-to-2x/?view=aspnetcore-3.0)
+* [The MVC Specific page for the above guidance](https://docs.microsoft.com/en-us/aspnet/core/migration/mvc?view=aspnetcore-3.0)
+* [The Little ASP.NET Core Book](https://recaffeinate.co/book/)
+
+## Choose Your Own Adventure
+
+Once we've done the core of the updates, we'll have some places we can go. Suggestions:
+
+* Containerize the app using Docker
+* Add .NET Core Health Checks
+* Re-implement -- or even better, Migrate -- the identity & authentication. 
+* Add an Azure DevOps build with a YAML file in the repo.
