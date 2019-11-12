@@ -18,6 +18,21 @@ namespace MvcMovie.Controllers
             _logger = logger;
         }
 
+        public IActionResult About()
+        {
+            ViewData["Title"] = "Your application description page.";
+
+            return View();
+        }
+
+        public IActionResult Contact()
+        {
+            ViewData["Message"] = "Your contact page.";
+
+            return View();
+        }
+
+
         public IActionResult Index()
         {
             return View();
